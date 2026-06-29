@@ -1,13 +1,17 @@
 # MVP2Week
 
-> A two-week MVP (Minimum Viable Product) project — a web application built to validate an idea quickly.
+> A **one-week MVP** (Minimum Viable Product) project — a web application built to validate an idea as quickly as possible.
 
-[![Status](https://img.shields.io/badge/status-in%20progress-yellow)]()
+[![Status](https://img.shields.io/badge/status-in%20development-orange)]()
+[![Timeline](https://img.shields.io/badge/timeline-1%20week-blueviolet)]()
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+> ⚠️ **Heads up:** This project is **currently in active development** and is being built on a tight **one-week timeline**. Expect breaking changes, missing features, and rough edges until the first stable cut is shipped. Please don't rely on it in production yet.
 
 ## Table of Contents
 
 - [About](#about)
+- [Development Status](#development-status)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
@@ -23,15 +27,27 @@
 
 ## About
 
-**MVP2Week** is a web application built within a two-week sprint with the goal of validating a product idea as quickly as possible. The focus is on shipping a usable, end-to-end slice of functionality rather than a fully polished product.
+**MVP2Week** is a web application built within a **one-week sprint** with the goal of validating a product idea as fast as possible. The focus is on shipping a usable, end-to-end slice of functionality rather than a fully polished product — everything beyond that is intentionally out of scope for this iteration.
 
-Describe your project's purpose here in 2–3 sentences. What problem does it solve? Who is it for? Why does it exist?
+This README describes the **current state** of the project, which is still in development and evolving day by day.
+
+## Development Status
+
+🚧 **In progress — week 1 of 1**
+
+The project is being built end-to-end within a single week. As a result:
+
+- The feature set below is **provisional** and may shift as scope is validated.
+- APIs, scripts, and configuration are subject to change without notice.
+- Documentation is being updated alongside the code — if something looks off or is missing, please open an issue.
+
+For the latest progress, see the [open issues](https://github.com/shevchenkoom-pixel/MVP2Week/issues) and [pull requests](https://github.com/shevchenkoom-pixel/MVP2Week/pulls).
 
 ## Features
 
-- ✨ Feature one — short, user-facing description
-- ✨ Feature two — short, user-facing description
-- ✨ Feature three — short, user-facing description
+- ✨ Feature one — short, user-facing description _(planned)_
+- ✨ Feature two — short, user-facing description _(planned)_
+- ✨ Feature three — short, user-facing description _(planned)_
 - 🚧 Feature in progress — describe what's currently being built
 
 ## Tech Stack
@@ -52,6 +68,8 @@ Describe your project's purpose here in 2–3 sentences. What problem does it so
 ## Getting Started
 
 Follow these instructions to get a copy of the project running on your local machine.
+
+> **Note:** Because the project is still in development, setup steps may change. If `npm install` or `npm run dev` fails after pulling the latest changes, check the open issues first.
 
 ### Prerequisites
 
@@ -164,7 +182,7 @@ See the [open issues](https://github.com/shevchenkoom-pixel/MVP2Week/issues) for
 
 ## Contributing
 
-Contributions are welcome! This is an MVP — please keep PRs small and focused.
+Contributions are welcome! This is an MVP being shipped on a one-week timeline — please keep PRs small and focused so they can be reviewed quickly.
 
 1. Fork the project
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -186,4 +204,4 @@ Project link: [https://github.com/shevchenkoom-pixel/MVP2Week](https://github.co
 
 ---
 
-_Made with ❤️ as a two-week MVP sprint._
+_🚧 In development — built as a one-week MVP sprint._
