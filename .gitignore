@@ -1,0 +1,191 @@
+# =========================================================
+# .gitignore — MVP2Week
+# Stack: Python (FastAPI) backend + Next.js (web) frontend
+# =========================================================
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+ehthumbs_vista.db
+$RECYCLE.BIN/
+
+# ---------- Editors / IDEs ----------
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# ---------- Environment / Secrets ----------
+.env
+.env.*
+!.env.example
+.envrc
+*.pem
+*.key
+*.crt
+secrets/
+config/local.yaml
+config/local.json
+*.local
+
+# ---------- Logs ----------
+*.log
+logs/
+*.log.*
+debugcli.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---------- Python / FastAPI ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+.python-cache/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.cache
+.mypy_cache/
+.ruff_cache/
+.pyright/
+.pyre/
+
+# FastAPI / Uvicorn
+.uvicorn/
+uvicorn.pid
+*.pid
+*.sock
+
+# Jupyter
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# ----- Django (transitive — leaves behind common files) -----
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# ---------- Node / Next.js / React / Web ----------
+node_modules/
+jspm_packages/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+.next-cache/
+
+# Next.js specific
+next-env.d.ts
+
+# Testing / lint
+.nyc_output/
+coverage/
+.eslintcache
+.stylelintcache
+
+# Cache
+.parcel-cache/
+.sass-cache/
+.cache-loader/
+
+# Storybook
+storybook-static/
+
+# Yarn / Pnpm / npm
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+.yarn-integrity
+
+# Vercel
+.vercel
+
+# Turbo
+.turbo
+
+# ---------- Misc ----------
+*.tsbuildinfo
+.eslintcache
+.npm/
+.eslintcache
+.pnpm-store/
+
+# Docker (mounted volumes)
+*.dockerfile.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+postgres-data/
+mongo-data/
+
+# Storage / uploaded files
+uploads/
+storage/
+tmp/
+temp/
+
+# OS metadata
+.zshrc
+.bashrc
+
+# Backups
+*.bak
+*.tmp
+*.orig
+*.rej
+
+# Project-specific
+/app/staticfiles/
+/storage/
