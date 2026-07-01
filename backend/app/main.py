@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .bootstrap import reset_database, seed_fake_user
 from .config import config
-from .routers import health
+from .routers import auth, catalog, health
 
 
 @asynccontextmanager
@@ -29,6 +29,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app.include_router(health.router)
+    app.include_router(auth.router)
+    app.include_router(catalog.router)
     return app
 
 

@@ -16,6 +16,8 @@ from .models import User
 def reset_database() -> None:
     config.data_dir.mkdir(parents=True, exist_ok=True)
     db_file = config.data_dir / config.db_filename
+    # Release any pooled connections before deleting the file (matters on Windows).
+    engine.dispose()
     if db_file.exists():
         db_file.unlink()
     Base.metadata.create_all(bind=engine)
