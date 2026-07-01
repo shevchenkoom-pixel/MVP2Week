@@ -52,6 +52,7 @@
 | 6  | `3d79f34` | `start.sh`/`stop.sh`/`start.ps1`/`stop.ps1` — PID в `.run/`, логи в `logs/`. Идемпотентно.                       |
 | 7  | `90e3079` | `Dockerfile` multi-stage (uv backend, node frontend) + `compose.yml` два сервиса с healthcheck. |
 | 8  | `cd1f270` | `backend/README.md`: install, run, tests, endpoints, env (`MVP2WEEK_*`), DB schema, project layout, Docker.       |
+| 9  | `fixup`   | `bootstrap.reset_database`: `gc.collect()` + try/except `PermissionError` со свежим filename — Windows-устойчивость к зомби-локам от предыдущих процессов. Smoke-test 3/3 + `npm run build` чистый. |
 
 ### Что уже в `main` для PL-6 ещё не попало
 
@@ -79,9 +80,20 @@
 
 ### Следующие шаги (в этом же сеансе)
 
-1. Smoke-test: поднять `uvicorn`, проверить 3 эндпоинта через `curl`.
-2. Запустить `npm run build` фронта — удостовериться, что `tsc` + сборка чистые.
-3. Закоммитить все правки в ветке.
+1. Smoke-test: поднять `uvicorn`, проверить 3 эндпоинта через `curl`. ✅ 2026-07-01
+2. Запустить `npm run build` фронта — удостовериться, что `tsc` + сборка чистые. ✅ 2026-07-01
+3. Закоммитить финальный `bootstrap` fix-up (Windows `PermissionError` устойчивость). ← текущий шаг
 4. Push `feat/pl-6-v1-foundation` → открыть PR через GitHub MCP.
 5. Перевести PL-6 в Jira: «К выполнению» → «В работе» → «Готово».
 6. Обновить memory (`project-mvp2week` — статус, ключевые пути, SHA корневого коммита).
+
+### Smoke-test результаты (2026-07-01, локально)
+
+| Endpoint                  | Status | Ответ                                                                                  |
+|---------------------------|--------|----------------------------------------------------------------------------------------|
+| `GET /health`             | 200    | `{"status":"ok"}`                                                                      |
+| `POST /auth/fake-login`   | 200    | `{"token":"fake-…","user":{"id":2,"display_name":"Smoke Tester","email":"smoke.tester@local"}}` |
+| `GET /api/catalog`        | 200    | 12 шаблонов из `catalog.json`                                                          |
+| `pytest`                  | 5/5 ✅ | StarletteDeprecationWarning по `httpx` (не блокирует)                                  |
+| `npm run build`           | OK ✅ | TypeScript чистый, 5 routes: `/`, `/_not-found`, `/app`, `/login`, `/prototype/nda`, Proxy (Middleware) |
+| Backend data dir          | OK ✅  | `data/app.db` создаётся при `reset_database()`                                         |

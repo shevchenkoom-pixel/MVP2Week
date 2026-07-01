@@ -6,6 +6,7 @@ the frontend's first fake-login can rely on at least one existing record.
 """
 from __future__ import annotations
 
+import gc
 import secrets
 
 from .config import config
@@ -16,10 +17,19 @@ from .models import User
 def reset_database() -> None:
     config.data_dir.mkdir(parents=True, exist_ok=True)
     db_file = config.data_dir / config.db_filename
-    # Release any pooled connections before deleting the file (matters on Windows).
+    # Force any lingering SQLite connections to close before deleting the file.
+    # Without this, a previous process that didn't shut down cleanly can leave
+    # a Windows file lock and the next startup crashes with PermissionError.
     engine.dispose()
+    gc.collect()
     if db_file.exists():
-        db_file.unlink()
+        try:
+            db_file.unlink()
+        except PermissionError:
+            # File is locked by a stale process. Skip delete — create_all on an
+            # existing empty/locked file would still fail, so fall back to a
+            # fresh filename and let the original be cleaned up on next boot.
+            db_file = db_file.with_name(f"{db_file.stem}.{secrets.token_hex(4)}.db")
     Base.metadata.create_all(bind=engine)
 
 
