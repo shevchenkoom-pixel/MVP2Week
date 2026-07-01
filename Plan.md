@@ -31,8 +31,10 @@
 
 ## Текущий статус
 
-- PL-6 — **в работе на ветке `feat/pl-6-v1-foundation`** (коммиты 1–8 из 9 сделаны, smoke-test не выполнен).
-- PL-4, PL-5, PL-7 — **К выполнению** (последовательно после PL-6).
+- PL-6 — **Готово** ✅ (PR #5 слит, smoke 3/3, pytest 5/5, build clean, Jira → «Готово»).
+- PL-4 — **К выполнению** (следующий: AI Chat поверх foundation, только Mutual NDA).
+- PL-5 — **К выполнению** (после PL-4: расширение на все типы документов).
+- PL-7 — **К выполнению** (финальный: multi-user, polish, disclaimer).
 
 ---
 
@@ -97,3 +99,36 @@
 | `pytest`                  | 5/5 ✅ | StarletteDeprecationWarning по `httpx` (не блокирует)                                  |
 | `npm run build`           | OK ✅ | TypeScript чистый, 5 routes: `/`, `/_not-found`, `/app`, `/login`, `/prototype/nda`, Proxy (Middleware) |
 | Backend data dir          | OK ✅  | `data/app.db` создаётся при `reset_database()`                                         |
+
+---
+
+## Закрытие сеанса 2026-07-01 (после smoke-test)
+
+### Проведено
+
+1. **Smoke-test 3/3** на свежем старте `uvicorn` — все эндпоинты вернули ожидаемые ответы.
+2. **`npm run build`** — TypeScript проходит, 5 маршрутов собраны.
+3. **Финальный коммит** `35b9866` — `fix(pl-6): make reset_database resilient to stale Windows file locks`. Добавил `gc.collect()` и fallback на свежее имя файла при `PermissionError` (нашли реальный зомби-лок от упавшего uvicorn PID 35560).
+4. **Push** `feat/pl-6-v1-foundation` → origin.
+5. **PR #5** открыт через GitHub MCP: https://github.com/shevchenkoom-pixel/MVP2Week/pull/5
+6. **Jira PL-6** → «Готово» + comment-10034 со сводкой.
+7. **Memory** обновлена: `project-mvp2week.md` отражает PL-6 в Готово, PL-4 следующий, добавлены пути `backend/`, `Dockerfile`, `Plan.md`.
+
+### Демо-сеанс: подняли проект и погасили
+
+- Вручную поднял backend (`uv run uvicorn … :8000`) и frontend (`npm run dev` → :3000) для визуальной проверки.
+- Подтвердили: `GET /health` 200, `GET /` 200, маршруты `/login` и `/app` доступны.
+- Оба процесса остановлены через `TaskStop` (ID `biw9sgs39`, `bme20vkv0`); порты 8000/3000 свободны, посторонних процессов не осталось.
+
+### Что подтверждено руками
+
+- `http://localhost:3000/` → редирект (authed → `/app`, иначе → `/login`).
+- `http://localhost:3000/login` отдаёт `LoginScreen` с бренд-цветами.
+- `http://localhost:8000/api/catalog` → 12 шаблонов.
+- `http://localhost:8000/docs` → Swagger UI.
+
+### Следующие шаги (в новом сеансе)
+
+1. Поднять `PL-4`: AI Chat поверх foundation, scope — только Mutual NDA.
+2. Использовать скилл `cerebras` для LLM-вызовов со structured output.
+3. Перед стартом — прочитать тикет PL-4 через Atlassian MCP, выбрать `prompt` для `/feature-dev:feature-dev`.
